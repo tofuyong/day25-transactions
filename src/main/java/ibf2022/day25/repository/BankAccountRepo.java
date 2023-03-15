@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Repository;
@@ -34,7 +35,7 @@ public class BankAccountRepo {
 
     public BankAccount retrieveAccountDetails(Integer accountId) {
         BankAccount bankAccount = null;
-        bankAccount = jdbcTemplate.queryForObject(GET_ACCOUNT_SQL, BankAccount.class, accountId);
+        bankAccount = jdbcTemplate.queryForObject(GET_ACCOUNT_SQL, BeanPropertyRowMapper.newInstance(BankAccount.class), accountId);
         return bankAccount;
     }
 
@@ -60,7 +61,6 @@ public class BankAccountRepo {
 
     public Boolean createAccount(BankAccount bankAccount) {
         Boolean bCreated = false;
-
         // my method using update - check if it works
         // int iCreated = 0;
         // iCreated = jdbcTemplate.update(CREATE_ACCOUNT_SQL, bankAccount.getFullName(), 
