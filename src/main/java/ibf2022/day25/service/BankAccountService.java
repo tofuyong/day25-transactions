@@ -28,7 +28,6 @@ public class BankAccountService {
 
         Boolean bProceed = false;  // declare another variable whether to proceed with withdrawal
 
-
         // 1. Check if accounts (withdrawer and depositor) are valid (active)
         withdrawalAccount = bankAcctRepo.retrieveAccountDetails(accountFrom);
         depositAccount = bankAcctRepo.retrieveAccountDetails(accountTo);
@@ -55,7 +54,6 @@ public class BankAccountService {
             if (!bWithdrawn) {
                 throw new IllegalArgumentException("Simulate error before withdrawal"); 
             }
-
             // 4. Perform the deposit (requires transaction)
             bDeposited = bankAcctRepo.depositAmount(accountTo, amount);
         }
